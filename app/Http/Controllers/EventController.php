@@ -50,18 +50,7 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->items = $request->items;
 
-        //Image Upload
-        if($request->hasFile('image') && $request->file('image')->isValid()){
-            $requestImage = $request->image;
-
-            $extension = $requestImage->extension();
-
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-            $request->image->move(public_path('img/events'), $imageName);
-
-            $event->image = $imageName;
-        }
+        $event->image = EventController::imageUpload($request);
 
         $user = auth()->user();
         $event->user_id = $user->id;
@@ -90,7 +79,39 @@ class EventController extends Controller
     public function destroy($id) {
         Event::findOrFail($id)->delete();
 
-        return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso');
+        return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso!');
     }
+
+    public function edit($id) {
+        $event = Event::findOrFail($id);
+
+        return view('events.edit', ['event' => $event]);
+    }
+
+    public function update(Request $request) {
+        $data = $request->all();
+
+        $data['image'] = EventController::imageUpload($request);
+
+        Event::findOrFail($request->id)->update($data);
+
+        return redirect('/dashboard')->with('msg', 'Evento editado com sucesso!');
+    }
+
+    private function imageUpload(Request $request){
+        //Image Upload
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $request->image->move(public_path('img/events'), $imageName);
+
+            return $imageName;
+        }
+    }
+
 
 }
