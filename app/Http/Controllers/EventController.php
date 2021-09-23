@@ -63,9 +63,22 @@ class EventController extends Controller
     public function show($id){
         $event = Event::findOrFail($id);
 
+        $user = auth()->user();
+        $hasUserJointed = false;
+
+        if($user){
+            $userEvents = $user->eventsAsParticipant->toArray();
+
+            foreach($userEvents as $userEvent){
+                if($userEvent['id'] == $id){
+                    $hasUserJointed = true;
+                }
+            }
+        }
+
         $eventOwner = User::where('id', $event->user_id)->first()->toArray();
 
-        return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner]);
+        return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner, 'hasUserJointed' => $hasUserJointed]);
     }
 
     public function dashboard() {
@@ -92,7 +105,7 @@ class EventController extends Controller
         if($user->id != $event->user_id){
             return redirect('/dashboard');
         }
-        
+
         return view('events.edit', ['event' => $event]);
     }
 
@@ -114,6 +127,16 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         return redirect('/dashboard')->with('msg', 'Sua presença está confirmada no evento ' . $event->title);
+    }
+
+    public function leaveEvent($id){
+        $user = auth()->user();
+
+        $user->eventsAsParticipant()->detach($id);
+
+        $event = Event::findOrFail($id);
+
+        return redirect('/dashboard')->with('msg', 'Você saiu com sucesso do evento: ' . $event->title);
     }
 
     private function imageUpload(Request $request){
