@@ -1,3 +1,13 @@
+/* Fonts */
+@font-face {
+    font-family: bookmanOldStyleLeve;
+    src: url(../fonts/Bookman-Old-Style.TTF);
+}
+@font-face {
+    font-family: brushScriptStdMedium;
+    src: url(../fonts/Brush-Script-Std.otf);
+}
+
 /* General */
 * {
    font-family: 'Roboto';
@@ -53,7 +63,9 @@ header {
 
 /* navbar */
 #navbar img {
-   width: 40px;
+   width: 100px;
+   margin-left: 5%;
+   margin-right: 10%;
 }
 
 #navbar {
@@ -63,12 +75,17 @@ header {
 }
 
 #navbar a {
-   font-size: 14px;
+   font-size: 20px;
    color: #757575;
 }
 
 #navbar a:hover {
    color: #F2A340;
+}
+
+#navbar .navbar-brand {
+	font-family: brushScriptStdMedium;
+	font-size: 72px;
 }
 
 /* Search Container */

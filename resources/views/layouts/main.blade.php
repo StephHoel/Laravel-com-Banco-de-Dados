@@ -21,35 +21,34 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="collapse navbar-collapse" id="navbar">
             <a href="/" class="navbar-brand">
-              <img src="/img/hdcevents_logo.svg" alt="HDC Events">
+              <img src="/img/Steph_Hoel_c.png" alt="Steph Hoel">
+              Steph Hoel
             </a>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a href="/" class="nav-link">Eventos</a>
+                <a href="/videos" class="nav-link">Vídeos</a>
               </li>
               <li class="nav-item">
-                <a href="/events/create" class="nav-link">Criar Evento</a>
+                <a href="/web" class="nav-link">Web</a>
               </li>
-              @auth
-                <li class="nav-item">
-                  <a href="/dashboard" class="nav-link">Meus Eventos</a>
-                </li>
-                <li class="nav-item">
-                  <form action="/logout" method="POST">
-                  @csrf
-                  <a href="/logout" class="nav-link" onclick="event.preventDefault();
-                    this.closest('form').submit();">Sair</a>
-                  </form>
-                </li>
-              @endauth
-              @guest
               <li class="nav-item">
-                <a href="/login" class="nav-link">Entrar</a>
+                <a href="/jogos" class="nav-link">Jogos</a>
               </li>
-                <li class="nav-item">
-                <a href="/register" class="nav-link">Cadastrar</a>
+              <li class="nav-item">
+                <a href="/blog" class="nav-link">Blog</a>
               </li>
-              @endguest
+              <li class="nav-item">
+                <a href="/textos" class="nav-link">Textos</a>
+              </li>
+              <li class="nav-item">
+                <a href="/algiz" class="nav-link">Algiz</a>
+              </li>
+              <li class="nav-item">
+                <a href="/sobre" class="nav-link">Sobre</a>
+              </li>
+              <li class="nav-item">
+                <a href="/contato" class="nav-link">Contato</a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -65,7 +64,7 @@
         </div>
       </main>
       <footer>
-         <p>HDC Events &copy; 2021</p>
+         <p>Steph Hoel &copy; 2021</p>
       </footer>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
